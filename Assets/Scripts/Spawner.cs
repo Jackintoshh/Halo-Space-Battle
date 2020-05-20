@@ -6,7 +6,7 @@ public class Spawner : MonoBehaviour
 {
     public List<GameObject> banshees = new List<GameObject>();
     public List<GameObject> locations = new List<GameObject>();
-    int maxBanshees = 20;
+    int maxBanshees = 5;
     public GameObject bansheePref;
     // Start is called before the first frame update
     void Start()
@@ -26,10 +26,11 @@ public class Spawner : MonoBehaviour
     {
         for (int i = 0; i < maxBanshees; i++)
         {
-            yield return new WaitForSeconds(1);
+            //yield return new WaitForSeconds(1);
             int rand = (int)Random.Range(0, 3);
             GameObject banshee = Instantiate(bansheePref, locations[rand].transform.position, Quaternion.identity, this.transform);
             banshees.Add(banshee);
         }
+        yield return new WaitForSeconds(1);
     }
 }

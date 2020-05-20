@@ -43,8 +43,8 @@ public class BigBoid : MonoBehaviour
 
     public Vector3 Pursue(BansheeBoid pursueTarget)
     {
-        if (banshee != null)
-        {
+        ///if (banshee != null)
+        //{
             pursueTarget = banshee.GetComponentInChildren<BansheeBoid>();
             float dist = Vector3.Distance(pursueTarget.transform.position, transform.position);
             float time = dist / maxSpeed;
@@ -52,9 +52,9 @@ public class BigBoid : MonoBehaviour
             pursueTargetPos = pursueTarget.transform.position + pursueTarget.velocity * time;
 
             return Seek(pursueTargetPos);
-        }
+       // }
 
-        return Vector3.zero;
+        //return Vector3.zero;
     }
 
 
