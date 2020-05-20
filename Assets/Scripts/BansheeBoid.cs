@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BigBoid : MonoBehaviour
+public class BansheeBoid : MonoBehaviour
 {
     public Vector3 velocity = Vector3.zero;
     public Vector3 acceleration = Vector3.zero;
@@ -34,15 +34,15 @@ public class BigBoid : MonoBehaviour
     public float waypointDistance = 3;
     public Path path;
 
-    public BansheeBoid pursueTarget;
+    public BigBoid pursueTarget;
     public bool pursueEnabled;
     public Vector3 pursueTargetPos;
 
     public GameObject banshee;
 
-    public Vector3 Pursue(BansheeBoid pursueTarget)
+    public Vector3 Pursue(BigBoid pursueTarget)
     {
-        pursueTarget = banshee.GetComponentInChildren<BansheeBoid>();
+        pursueTarget = banshee.GetComponentInChildren<BigBoid>();
         float dist = Vector3.Distance(pursueTarget.transform.position, transform.position);
         float time = dist / maxSpeed;
 
@@ -94,10 +94,10 @@ public class BigBoid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
-    
+
 
     Vector3 Arrive(Vector3 target)
     {
@@ -165,7 +165,7 @@ public class BigBoid : MonoBehaviour
         speed = velocity.magnitude;
         if (speed > 0)
         {
-            Vector3 tempUp = Vector3.Lerp(transform.up, Vector3.right + (acceleration * banking), Time.deltaTime * 3.0f);
+            Vector3 tempUp = Vector3.Lerp(transform.up, new Vector3(0, 0, 1) + (acceleration * banking), Time.deltaTime * 3.0f);
             transform.LookAt(transform.position + velocity, tempUp);
             //transform.forward = velocity;
             velocity -= (damping * velocity * Time.deltaTime);
