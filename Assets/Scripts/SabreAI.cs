@@ -9,6 +9,9 @@ public class SabreAI : MonoBehaviour
     GameObject banshee;
     BoxCollider bc;
     BigBoid sabreBoid;
+    List<GameObject> banshees = new List<GameObject>();
+    public AudioClip explode;
+    AudioSource audioS;
 
     // Start is called before the first frame update
     void Start()
@@ -21,17 +24,23 @@ public class SabreAI : MonoBehaviour
         bc = GetComponent<BoxCollider>();
         sabreBoid = GetComponent<BigBoid>();*/
         StartCoroutine(waiter());
+        
     }
 
     IEnumerator waiter()
     {
         yield return new WaitForSeconds(3);
+        banshees = spawner.GetComponent<Spawner>().banshees;
         amount = spawner.GetComponent<Spawner>().banshees.Count;
         rand = (int)Random.Range(0, amount);
         Debug.Log(amount);
         banshee = spawner.GetComponent<Spawner>().banshees[rand];
         bc = GetComponent<BoxCollider>();
         sabreBoid = GetComponent<BigBoid>();
+        audioS = GetComponent<AudioSource>();
+        audioS.clip = explode;
+
+        
     }
     // Update is called once per frame
     void Update()
@@ -44,6 +53,8 @@ public class SabreAI : MonoBehaviour
         if (collision.transform.tag != "waypoint")
         {
             Destroy(collision.gameObject);
+            audioS.Play();
+            spawner.GetComponent<Spawner>().banshees.RemoveAt(rand);
             amount = spawner.GetComponent<Spawner>().banshees.Count;
             rand = (int)Random.Range(0, amount);
             banshee = spawner.GetComponent<Spawner>().banshees[rand];

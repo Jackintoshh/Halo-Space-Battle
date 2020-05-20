@@ -11,12 +11,8 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for (int i = 0; i < maxBanshees; i++)
-        {
-            int rand = (int)Random.Range(0, 3);
-            GameObject banshee = Instantiate(bansheePref, locations[rand].transform.position, Quaternion.identity, this.transform);
-            banshees.Add(banshee);
-        }
+        
+        StartCoroutine(Spawn());
     }
 
     // Update is called once per frame
@@ -24,5 +20,16 @@ public class Spawner : MonoBehaviour
     {
         //int rand = (int)Random.Range(0, 2);
         
+    }
+
+    IEnumerator Spawn()
+    {
+        for (int i = 0; i < maxBanshees; i++)
+        {
+            yield return new WaitForSeconds(1);
+            int rand = (int)Random.Range(0, 3);
+            GameObject banshee = Instantiate(bansheePref, locations[rand].transform.position, Quaternion.identity, this.transform);
+            banshees.Add(banshee);
+        }
     }
 }
