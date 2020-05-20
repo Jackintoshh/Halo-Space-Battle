@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    List<GameObject> banshees = new List<GameObject>();
+    public List<GameObject> banshees = new List<GameObject>();
     public List<GameObject> locations = new List<GameObject>();
     int maxBanshees = 20;
     public GameObject bansheePref;
@@ -13,7 +13,7 @@ public class Spawner : MonoBehaviour
     {
         for (int i = 0; i < maxBanshees; i++)
         {
-            int rand = (int)Random.Range(0, 2);
+            int rand = (int)Random.Range(0, 3);
             GameObject banshee = Instantiate(bansheePref, locations[rand].transform.position, Quaternion.identity, this.transform);
             banshees.Add(banshee);
         }

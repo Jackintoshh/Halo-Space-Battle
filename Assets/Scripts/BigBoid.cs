@@ -39,9 +39,11 @@ public class BigBoid : MonoBehaviour
     public Vector3 pursueTargetPos;
 
     public GameObject banshee;
+    public GameObject spawner;
 
     public Vector3 Pursue(BansheeBoid pursueTarget)
     {
+        
         pursueTarget = banshee.GetComponentInChildren<BansheeBoid>();
         float dist = Vector3.Distance(pursueTarget.transform.position, transform.position);
         float time = dist / maxSpeed;
@@ -94,7 +96,9 @@ public class BigBoid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        //int amount = spawner.GetComponent<Spawner>().banshees.Count;
+        //int rand = (int)Random.Range(0, amount);
+        //banshee = spawner.GetComponent<Spawner>().banshees[rand];
     }
 
     
