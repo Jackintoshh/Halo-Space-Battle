@@ -16,7 +16,7 @@ public class BansheeBoid : MonoBehaviour
     public float speed = 0;
 
     public bool seekEnabled = false;
-    Vector3 target;
+    public Vector3 target;
     public Transform targetTransform;
 
     public bool arriveEnabled = true;
@@ -114,7 +114,7 @@ public class BansheeBoid : MonoBehaviour
 
     Vector3 Seek(Vector3 target)
     {
-        target = banshee.transform.position;
+        //target = banshee.transform.position;
         Vector3 toTarget = target - transform.position;
         Vector3 desired = toTarget.normalized * maxSpeed;
 
@@ -153,10 +153,7 @@ public class BansheeBoid : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (targetTransform != null)
-        {
-            target = targetTransform.position;
-        }
+        
         force = CalculateForce();
         acceleration = force / mass;
         velocity += acceleration * Time.deltaTime;
