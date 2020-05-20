@@ -12,7 +12,12 @@ public class Waypoints : MonoBehaviour
     void Start()
     {
         banboid = GetComponent<BansheeBoid>();
-        rand = (int)Random.Range(0, 2);
+        rand = (int)Random.Range(0, 3);
+
+        for(int i = 0; i < 3; i++ )
+        {
+            waypoints.Add(GameObject.Find("Waypoint" + i.ToString()));
+        }
 
         banboid.target = waypoints[rand].transform.position;
 
@@ -25,7 +30,7 @@ public class Waypoints : MonoBehaviour
 
         if (this.transform.position.x < waypoints[rand].transform.position.x + 10000 && this.transform.position.z < waypoints[rand].transform.position.z + 10000)
         {
-            rand = (int)Random.Range(0, rand);
+            rand = (int)Random.Range(0, 3);
             banboid.target = waypoints[rand].transform.position;
         }
     }
