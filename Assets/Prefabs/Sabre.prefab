@@ -30,7 +30,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2247105901003768716}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 57.696003, y: -163.32701, z: 0}
 --- !u!20 &2247105900264508535
 Camera:
@@ -108,12 +108,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2247105900814933548}
-  m_LocalRotation: {x: 0.031151082, y: 0.063231565, z: 0.719082, w: 0.6913411}
-  m_LocalPosition: {x: 935, y: -3893, z: -2722}
+  m_LocalRotation: {x: 0.06323156, y: -0.031151082, z: -0.6913411, w: 0.719082}
+  m_LocalPosition: {x: -351.00134, y: 1686.1248, z: -1782.3413}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 2247105901003768716}
-  m_RootOrder: 1
+  m_Father: {fileID: 6509361893809568419}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -2.7440002, y: 367.607, z: -267.929}
 --- !u!20 &2247105900814933551
 Camera:
@@ -195,7 +195,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6509361893809568419}
-  - {fileID: 2247105900814933549}
   - {fileID: 2247105900264508533}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -234,6 +233,7 @@ MonoBehaviour:
   pursueEnabled: 1
   pursueTargetPos: {x: 0, y: 0, z: 0}
   banshee: {fileID: 0}
+  spawner: {fileID: 0}
 --- !u!1001 &6064532172126853914
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -300,11 +300,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 180
-      objectReference: {fileID: 0}
-    - target: {fileID: 5406247032748829211, guid: 8846c67cc0a43f74ba9b6c0c1ed38435,
-        type: 3}
-      propertyPath: banshee
-      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 7463083021396845651, guid: 8846c67cc0a43f74ba9b6c0c1ed38435,
         type: 3}
@@ -375,6 +370,11 @@ PrefabInstance:
         type: 3}
       propertyPath: far clip plane
       value: 100000
+      objectReference: {fileID: 0}
+    - target: {fileID: 5406247032748829211, guid: 8846c67cc0a43f74ba9b6c0c1ed38435,
+        type: 3}
+      propertyPath: banshee
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5406247032748829211, guid: 8846c67cc0a43f74ba9b6c0c1ed38435, type: 3}

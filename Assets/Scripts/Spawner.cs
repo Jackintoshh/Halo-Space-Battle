@@ -26,11 +26,11 @@ public class Spawner : MonoBehaviour
     {
         for (int i = 0; i < maxBanshees; i++)
         {
-            //yield return new WaitForSeconds(1);
+            yield return new WaitForSeconds(1.5f);
             int rand = (int)Random.Range(0, 3);
             GameObject banshee = Instantiate(bansheePref, locations[rand].transform.position, Quaternion.identity, this.transform);
             banshees.Add(banshee);
         }
-        yield return new WaitForSeconds(1);
+       // yield return new WaitForSeconds(1);
     }
 }

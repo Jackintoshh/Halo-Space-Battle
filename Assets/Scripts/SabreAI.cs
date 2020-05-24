@@ -6,7 +6,7 @@ public class SabreAI : MonoBehaviour
 {
     int amount, rand;
     public GameObject spawner;
-    GameObject banshee;
+    public GameObject banshee;
     BoxCollider bc;
     BigBoid sabreBoid;
     List<GameObject> banshees = new List<GameObject>();
@@ -34,11 +34,11 @@ public class SabreAI : MonoBehaviour
         amount = spawner.GetComponent<Spawner>().banshees.Count;
         rand = (int)Random.Range(0, amount);
         Debug.Log(amount);
-        banshee = spawner.GetComponent<Spawner>().banshees[rand];
+        banshee = spawner.GetComponent<Spawner>().banshees[rand].GetComponentInChildren<BansheeBoid>().gameObject;
         bc = GetComponent<BoxCollider>();
         sabreBoid = GetComponent<BigBoid>();
         audioS = GetComponent<AudioSource>();
-        audioS.clip = explode;
+        //audioS.clip = explode;
 
         
     }
@@ -48,16 +48,22 @@ public class SabreAI : MonoBehaviour
         
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider collision)
     {
-        if (collision.transform.tag != "waypoint")
+        if (collision.gameObject.tag != "waypoint" && collision.gameObject.name == banshee.transform.name)
         {
-            Destroy(collision.gameObject);
-            audioS.Play();
+            
+            Destroy(collision.transform.parent.gameObject);
+            //sabreBoid.velocity = Vector3.zero;
+            //sabreBoid.acceleration = Vector3.zero;
+            //sabreBoid.force = Vector3.zero;
+            //sabreBoid.speed = 0f;
+            //sabreBoid.pursueEnabled = false;
+            //audioS.Play();
             spawner.GetComponent<Spawner>().banshees.RemoveAt(rand);
             amount = spawner.GetComponent<Spawner>().banshees.Count;
-            rand = (int)Random.Range(0, amount);
-            banshee = spawner.GetComponent<Spawner>().banshees[rand];
+            //rand = (int)Random.Range(0, amount);
+            banshee = GameObject.Find("Banshee(Clone)").GetComponentInChildren<BansheeBoid>().gameObject;//spawner.GetComponent<Spawner>().banshees[rand];
             sabreBoid.banshee = banshee;
         }
     }

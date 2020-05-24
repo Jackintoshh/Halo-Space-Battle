@@ -165,6 +165,11 @@ public class BigBoid : MonoBehaviour
         {
             target = targetTransform.position;
         }
+        if(banshee == null)
+        {
+            banshee = GameObject.Find("Banshee(Clone)").GetComponentInChildren<BansheeBoid>().gameObject;
+            GetComponent<SabreAI>().banshee = banshee;
+        }
         force = CalculateForce();
         acceleration = force / mass;
         velocity += acceleration * Time.deltaTime;
