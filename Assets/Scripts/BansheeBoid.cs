@@ -39,6 +39,8 @@ public class BansheeBoid : MonoBehaviour
     public Vector3 pursueTargetPos;
 
     public GameObject banshee;
+    public AudioClip explode;
+    public AudioSource audsource;
 
     public Vector3 Pursue(BigBoid pursueTarget)
     {
@@ -94,7 +96,8 @@ public class BansheeBoid : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        audsource = GetComponent<AudioSource>();
+        audsource.clip = explode;
     }
 
 

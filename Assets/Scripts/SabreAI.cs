@@ -6,12 +6,12 @@ public class SabreAI : MonoBehaviour
 {
     int amount, rand;
     public GameObject spawner;
-    public GameObject banshee;
+    public GameObject banshee, cam;
     BoxCollider bc;
     BigBoid sabreBoid;
     List<GameObject> banshees = new List<GameObject>();
-    public AudioClip explode;
-    AudioSource audioS;
+    public AudioClip explode, sabreShot;
+    AudioSource audioS, audioS2;
 
     // Start is called before the first frame update
     void Start()
@@ -38,8 +38,11 @@ public class SabreAI : MonoBehaviour
         bc = GetComponent<BoxCollider>();
         sabreBoid = GetComponent<BigBoid>();
         audioS = GetComponent<AudioSource>();
-        //audioS.clip = explode;
+        audioS.clip = sabreShot;
+        audioS2 = cam.GetComponent<AudioSource>();
+        audioS2.clip = explode;
 
+        
         
     }
     // Update is called once per frame
@@ -52,14 +55,21 @@ public class SabreAI : MonoBehaviour
     {
         if (collision.gameObject.tag != "waypoint" && collision.gameObject.name == banshee.transform.name)
         {
+
+            audioS.Play();
+
+            //collision.GetComponent<BansheeBoid>().audsource.Play();
             
             Destroy(collision.transform.parent.gameObject);
+            audioS2.Play();
             //sabreBoid.velocity = Vector3.zero;
             //sabreBoid.acceleration = Vector3.zero;
             //sabreBoid.force = Vector3.zero;
             //sabreBoid.speed = 0f;
             //sabreBoid.pursueEnabled = false;
+            //audioS.clip = explode;
             //audioS.Play();
+
             spawner.GetComponent<Spawner>().banshees.RemoveAt(rand);
             amount = spawner.GetComponent<Spawner>().banshees.Count;
             //rand = (int)Random.Range(0, amount);
