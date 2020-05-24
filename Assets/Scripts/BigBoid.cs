@@ -40,6 +40,9 @@ public class BigBoid : MonoBehaviour
 
     public GameObject banshee;
     public GameObject spawner;
+    public GameObject savannah;
+    public AudioClip endDialogue;
+    public AudioSource savAudio;
 
     public Vector3 Pursue(BansheeBoid pursueTarget)
     {
@@ -122,11 +125,16 @@ public class BigBoid : MonoBehaviour
 
     Vector3 Seek(Vector3 target)
     {
-        target = banshee.transform.position;
-        Vector3 toTarget = target - transform.position;
-        Vector3 desired = toTarget.normalized * maxSpeed;
+        if (banshee != null)
+        {
+            target = banshee.transform.position;
+            Vector3 toTarget = target - transform.position;
+            Vector3 desired = toTarget.normalized * maxSpeed;
 
-        return desired - velocity;
+            return desired - velocity;
+        }
+
+        return velocity;
     }
 
     public Vector3 CalculateForce()
@@ -165,11 +173,23 @@ public class BigBoid : MonoBehaviour
         {
             target = targetTransform.position;
         }
-        if(banshee == null)
+
+        if (GameObject.Find("Banshee(Clone)") != null)
         {
-            banshee = GameObject.Find("Banshee(Clone)").GetComponentInChildren<BansheeBoid>().gameObject;
-            GetComponent<SabreAI>().banshee = banshee;
+            if (banshee == null)
+            {
+                banshee = GameObject.Find("Banshee(Clone)").GetComponentInChildren<BansheeBoid>().gameObject;
+                GetComponent<SabreAI>().banshee = banshee;
+            }
         }
+
+        if(GetComponent<SabreAI>().getKillCount() >= 5)
+        {
+            banshee = savannah;
+            savAudio = savannah.GetComponentInParent<AudioSource>();
+            savAudio.clip = endDialogue;     
+        }
+
         force = CalculateForce();
         acceleration = force / mass;
         velocity += acceleration * Time.deltaTime;

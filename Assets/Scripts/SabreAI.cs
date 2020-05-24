@@ -12,17 +12,19 @@ public class SabreAI : MonoBehaviour
     List<GameObject> banshees = new List<GameObject>();
     public AudioClip explode, sabreShot;
     AudioSource audioS, audioS2;
+    int killcount;
+    public GameObject finalDialogue;
 
     // Start is called before the first frame update
     void Start()
     {
+        audioS = GetComponent<AudioSource>();
+        audioS.clip = sabreShot;
+        audioS2 = cam.GetComponent<AudioSource>();
+        audioS2.clip = explode;
 
-        /*amount = spawner.GetComponent<Spawner>().banshees.Count;
-        rand = (int)Random.Range(0, amount-1);
-        Debug.Log(amount);
-        banshee = spawner.GetComponent<Spawner>().banshees[rand];
-        bc = GetComponent<BoxCollider>();
-        sabreBoid = GetComponent<BigBoid>();*/
+        killcount = 0;
+
         StartCoroutine(waiter());
         
     }
@@ -57,24 +59,31 @@ public class SabreAI : MonoBehaviour
         {
 
             audioS.Play();
-
-            //collision.GetComponent<BansheeBoid>().audsource.Play();
             
             Destroy(collision.transform.parent.gameObject);
-            audioS2.Play();
-            //sabreBoid.velocity = Vector3.zero;
-            //sabreBoid.acceleration = Vector3.zero;
-            //sabreBoid.force = Vector3.zero;
-            //sabreBoid.speed = 0f;
-            //sabreBoid.pursueEnabled = false;
-            //audioS.clip = explode;
-            //audioS.Play();
+            killcount++;
+            //Debug.Log(killcount);
 
+            audioS2.Play();
+
+            if (killcount >= 5)
+            {
+                finalDialogue.GetComponent<AudioSource>().Play();
+            }
+            
             spawner.GetComponent<Spawner>().banshees.RemoveAt(rand);
             amount = spawner.GetComponent<Spawner>().banshees.Count;
-            //rand = (int)Random.Range(0, amount);
+            
             banshee = GameObject.Find("Banshee(Clone)").GetComponentInChildren<BansheeBoid>().gameObject;//spawner.GetComponent<Spawner>().banshees[rand];
             sabreBoid.banshee = banshee;
+            
         }
+
+        
+    }
+
+    public int getKillCount()
+    {
+        return killcount;
     }
 }

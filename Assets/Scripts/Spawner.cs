@@ -15,22 +15,15 @@ public class Spawner : MonoBehaviour
         StartCoroutine(Spawn());
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //int rand = (int)Random.Range(0, 2);
-        
-    }
-
     IEnumerator Spawn()
     {
         for (int i = 0; i < maxBanshees; i++)
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(3f);
             int rand = (int)Random.Range(0, 3);
             GameObject banshee = Instantiate(bansheePref, locations[rand].transform.position, Quaternion.identity, this.transform);
             banshees.Add(banshee);
         }
-       // yield return new WaitForSeconds(1);
+       
     }
 }

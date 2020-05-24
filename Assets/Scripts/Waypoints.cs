@@ -28,7 +28,7 @@ public class Waypoints : MonoBehaviour
     void Update()
     {
 
-        if (this.transform.position.x < waypoints[rand].transform.position.x + 10000 && this.transform.position.z < waypoints[rand].transform.position.z + 10000)
+        if (this.transform.position.x < waypoints[rand].transform.position.x - 10000 && this.transform.position.z < waypoints[rand].transform.position.z - 10000)
         {
             rand = (int)Random.Range(0, 3);
             banboid.target = waypoints[rand].transform.position;
